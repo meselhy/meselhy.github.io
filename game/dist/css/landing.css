@@ -1,0 +1,134 @@
+@font-face {
+  font-family: "UAV OSD Mono";
+  src: url("../../assets/fonts/UAV-OSD-Sans-Mono.ttf"); }
+* {
+  box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth; }
+
+body {
+  font-family: "UAV OSD Mono";
+  font-variant-ligatures: none;
+  background-color: #222;
+  color: #eee;
+  font-size: 0.85em;
+  line-height: 2; }
+
+header, section {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 0; }
+  header img, section img {
+    width: 30%;
+    border: 1px solid #eee; }
+
+.container {
+  margin: 4em 7em;
+  width: 70%;
+  z-index: 2; }
+
+.container-flex {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center; }
+
+.last {
+  animation: blink 0.5s ease infinite; }
+
+nav {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  padding: 0;
+  z-index: 5; }
+  nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0; }
+  nav li {
+    padding: 10px 0;
+    margin: 0;
+    float: left;
+    font-size: 1.2em; }
+    nav li a {
+      color: #eee;
+      text-decoration: none; }
+
+header h1, section h2 {
+  font-size: 1.3em; }
+
+header h2 {
+  font-size: 1.2em; }
+
+.brand {
+  font-size: 2em; }
+
+section {
+  height: 100vh; }
+  section a {
+    color: #eee;
+    font-weight: bold; }
+
+.action-btn {
+  border: none;
+  color: white;
+  background-color: #222;
+  border: 1px solid #eee;
+  padding: 5px;
+  margin: 5px;
+  cursor: pointer;
+  font-family: "UAV OSD Mono";
+  font-size: 0.85em;
+  text-decoration: none; }
+
+footer {
+  background-color: #eee;
+  color: #222;
+  padding: 3em;
+  display: flex;
+  flex-direction: row;
+  width: 100%; }
+  footer div {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column; }
+    footer div:last-child {
+      align-items: flex-end;
+      text-align: right; }
+  footer p {
+    margin: 1em 0; }
+    footer p a {
+      text-decoration: none;
+      color: #222;
+      font-weight: bold; }
+
+.social-media-footer {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+  .social-media-footer li {
+    display: inline;
+    padding: 4px 0 4px 4px;
+    font-size: 2em; }
+    .social-media-footer li a, .social-media-footer li a:active {
+      text-decoration: none;
+      color: #222; }
+
+@keyframes blink {
+  from, to {
+    background-color: #eee;
+    color: #222; }
+  50% {
+    background-color: #222;
+    color: #eee; } }
+
+/*# sourceMappingURL=landing.css.map */

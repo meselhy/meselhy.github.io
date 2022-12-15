@@ -1,0 +1,70 @@
+{
+    "dir": "ltr",
+    "lang": "en-US",
+    "name": "Meselhy",
+    "short_name": "Meselhy",
+    "description": "Abdalla Meselhy | Developer",
+    "categories": ["business", "development", "security" , "social", "games"],
+    "display": "fullscreen",
+    "start_url": "https://meselhy.dev/",
+    "scope": "https://meselhy.dev/",
+    "theme_color": "#1d2931",
+    "background_color": "#1d2931",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "apple-touch-icon-precomposed.png",
+            "sizes": "any",
+            "type": "image/png"
+        },
+        {
+            "src": "apple-touch-icon.png",
+            "sizes": "180x180",
+            "type": "image/png"
+        },
+        {
+            "src": "favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png"
+        },
+        {
+            "src": "favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png"
+        },
+        {
+            "src": "favicon.ico",
+            "sizes": "48x48"
+        },
+        {
+            "src": "favicon-194x194.png",
+            "sizes": "194x194",
+            "type": "image/png"
+        },
+        {
+            "src": "safari-pinned-tab.svg",
+            "sizes": "any",
+            "purpose": "monochrome"
+        },
+        {
+            "src": "maskable_icon.png",
+            "sizes": "500x500",
+            "purpose": "maskable"
+        }
+    ]
+}

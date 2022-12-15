@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>ESCAPE ROOM</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="dist/css/main.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.3/howler.min.js" integrity="sha512-6+YN/9o9BWrk6wSfGxQGpt3EUK6XeHi6yeHV+TYD2GR0Sj/cggRpXr1BrAQf0as6XslxomMUxXp2vIl+fv0QRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+  <div class="container">
+    <!-- introduction -->
+    <input type="radio" name="scene" class="scene-radio" id="intro" checked />
+    <label class="scene intro" for="prolog-1">
+      <span class="intro-label">
+        Escape roo<span class="last">m</span>
+      </span>
+
+      <span class="intro-label">
+        Click anywhere inside here to begin<span class="last">.</span>
+      </span>
+    </label>
+
+    <!-- prolog -->
+    <input type="radio" name="scene" class="scene-radio" id="prolog-1" />
+    <label class="scene prolog" for="prolog-2">
+      <span class="prolog-label">
+        Huh? Where am I<span class="last">?</span>
+      </span>
+
+      <span class="prolog-label">
+        What is this place<span class="last">?</span>
+      </span>
+
+      <span class="prolog-label">
+        This place seems strange. I never saw this place before<span class="last">.</span>
+      </span>
+    </label>
+
+    <input type="radio" name="scene" class="scene-radio" id="prolog-2" />
+    <label class="scene prolog" for="instruction">
+      <span class="prolog-label">
+        I need to get out of here<span class="last">!</span>
+      </span>
+
+      <span class="prolog-label"> NOW!!<span class="last">!</span> </span>
+    </label>
+
+    <!-- instruction -->
+    <input type="radio" name="scene" class="scene-radio" id="instruction" />
+    <label class="scene instruction" for="scene-1">
+      <span class="instruction-label">
+        You have to complete the puzzle to get out of the house<span class="last">.</span>
+      </span>
+
+      <span class="instruction-label">
+        Click anywhere if you're ready<span class="last">.</span>
+      </span>
+    </label>
+
+    <!-- scene 1 -->
+    <input type="radio" name="scene" class="scene-radio" id="scene-1" />
+    <form class="scene scene-1">
+      <!-- bedroom interaction checkbox -->
+      <input type="checkbox" class="interaction-checkbox bedroom-switch-checkbox" name="bedroom-lamp"
+        id="bedroom-lamp" />
+      <input type="checkbox" class="interaction-checkbox bedroom-cupboard-1-checkbox" name="bedroom-cupboard-1"
+        id="bedroom-cupboard-1" />
+      <input type="checkbox" class="interaction-checkbox bedroom-vase-1-switch-checkbox" name="bedroom-vase-1-switch"
+        id="bedroom-vase-1-switch" />
+      <input type="checkbox" class="interaction-checkbox bedroom-vase-2-switch-checkbox" name="bedroom-vase-2-switch"
+        id="bedroom-vase-2-switch" />
+
+      <!-- bedroom interaction radio  -->
+      <input type="radio" class="trigger-radio bedroom-door-locked-radio" name="door-locked-event"
+        id="door-locked-event" />
+      <input type="radio" class="trigger-radio open-door-event-radio" name="open-door-event" id="open-door-event" />
+      <input type="radio" class="trigger-radio bedroom-place-hat-radio" name="bedroom-place-hat-event"
+        id="bedroom-place-hat-event" />
+
+      <!-- bedroom events to take items radio  -->
+      <input type="radio" class="trigger-radio bedroom-paper-item-radio" name="bedroom-item-paperball-1"
+        id="bedroom-item-paperball-1" />
+      <input type="radio" class="trigger-radio bedroom-paper-2-item-radio" name="bedroom-item-paperball-2"
+        id="bedroom-item-paperball-2" />
+      <input type="radio" class="trigger-radio bedroom-mouse-spray-item-radio" name="bedroom-item-mouse-spray"
+        id="bedroom-item-mouse-spray" />
+      <input type="radio" class="trigger-radio bedroom-item-key-radio" name="bedroom-item-key" id="bedroom-item-key" />
+
+      <!-- kitchen interaction checkbox -->
+      <input type="checkbox" class="interaction-checkbox kitchen-switch-checkbox" name="kitchen-lamp"
+        id="kitchen-lamp" />
+      <input type="checkbox" class="interaction-checkbox kitchen-stove-switch-checkbox" name="kitchen-stove-switch"
+        id="kitchen-stove-switch" />
+
+      <!-- kitchen interaction radio -->
+      <input type="radio" class="trigger-radio kitchen-put-paper-ball-1-trash-radio"
+        name="kitchen-put-paper-ball-1-trash-event" id="kitchen-put-paper-ball-1-trash-event" />
+      <input type="radio" class="trigger-radio kitchen-put-paper-ball-2-trash-radio"
+        name="kitchen-put-paper-ball-2-trash-event" id="kitchen-put-paper-ball-2-trash-event" />
+      <input type="radio" class="trigger-radio kitchen-put-can-trash-radio" name="kitchen-put-can-trash-event"
+        id="kitchen-put-can-trash-event" />
+      <input type="radio" class="trigger-radio kitchen-put-fish-bone-trash-radio"
+        name="kitchen-put-fish-bone-trash-event" id="kitchen-put-fish-bone-trash-event" />
+      <input type="radio" class="trigger-radio kitchen-kill-mouse-radio" name="kitchen-kill-mouse-event"
+        id="kitchen-kill-mouse-event" />
+      <input type="radio" class="trigger-radio kitchen-open-cabinet-1-radio" name="kitchen-open-cabinet-1-event"
+        id="kitchen-open-cabinet-1-event" />
+
+      <!-- kitchen events to take items radio  -->
+      <input type="radio" class="trigger-radio kitchen-item-paper-ball-1-trash-radio"
+        name="kitchen-item-paper-ball-1-trash" id="kitchen-item-paper-ball-1-trash" />
+      <input type="radio" class="trigger-radio kitchen-item-paper-ball-2-trash-radio"
+        name="kitchen-item-paper-ball-2-trash" id="kitchen-item-paper-ball-2-trash" />
+      <input type="radio" class="trigger-radio kitchen-item-can-trash-radio" name="kitchen-item-can-trash"
+        id="kitchen-item-can-trash" />
+      <input type="radio" class="trigger-radio kitchen-item-fish-bone-trash-radio" name="kitchen-item-fish-bone-trash"
+        id="kitchen-item-fish-bone-trash" />
+      <input type="radio" class="trigger-radio kitchen-item-study-room-key-radio" name="kitchen-item-study-room-key"
+        id="kitchen-item-study-room-key" />
+      <input type="radio" class="trigger-radio kitchen-item-battery-radio" name="kitchen-item-battery"
+        id="kitchen-item-battery" />
+      <input type="radio" class="trigger-radio kitchen-item-symbol-part-radio" name="kitchen-item-symbol-part"
+        id="kitchen-item-symbol-part" />
+
+      <!-- living room interaction checkbox -->
+      <input type="checkbox" class="interaction-checkbox living-room-curtain-checkbox" name="living-room-curtain"
+        id="living-room-curtain" />
+      <input type="checkbox" class="interaction-checkbox living-room-tv-screen-checkbox" name="living-room-tv-screen"
+        id="living-room-tv-screen" />
+
+      <!-- living room interaction radio -->
+      <input type="radio" class="trigger-radio living-room-door-locked-radio" name="living-room-door-locked-event"
+        id="living-room-door-locked-event" />
+      <input type="radio" class="trigger-radio living-room-unlock-door-radio" name="living-room-unlock-door-event"
+        id="living-room-unlock-door-event" />
+      <input type="radio" class="trigger-radio living-room-remote-not-working-radio"
+        name="living-room-remote-not-working-event" id="living-room-remote-not-working-event" />
+      <input type="radio" class="trigger-radio living-room-remote-place-battery-radio"
+        name="living-room-remote-place-battery-event" id="living-room-remote-place-battery-event" />
+      <input type="radio" class="trigger-radio living-room-unlock-main-door-radio"
+        name="living-room-unlock-main-door-event" id="living-room-unlock-main-door-event" />
+
+      <!-- living room events to take items radio -->
+      <input type="radio" class="trigger-radio living-room-item-picture-radio" name="living-room-item-picture"
+        id="living-room-item-picture" />
+      <input type="radio" class="trigger-radio living-room-item-document-1-radio" name="living-room-item-document-1"
+        id="living-room-item-document-1" />
+      <input type="radio" class="trigger-radio living-room-item-hat-radio" name="living-room-item-hat"
+        id="living-room-item-hat" />
+      <input type="radio" class="trigger-radio living-room-item-remote-radio" name="living-room-item-remote"
+        id="living-room-item-remote" />
+      <input type="radio" class="trigger-radio living-room-item-chest-key-radio" name="living-room-item-chest-key"
+        id="living-room-item-chest-key" />
+
+      <!-- study room interaction radio -->
+      <input type="radio" class="trigger-radio study-room-check-empty-symbol-radio"
+        name="study-room-check-empty-symbol-event" id="study-room-check-empty-symbol-event" />
+      <input type="radio" class="trigger-radio study-room-put-symbol-part-1-radio"
+        name="study-room-put-symbol-part-1-event" id="study-room-put-symbol-part-1-event" />
+      <input type="radio" class="trigger-radio study-room-put-symbol-part-2-radio"
+        name="study-room-put-symbol-part-2-event" id="study-room-put-symbol-part-2-event" />
+
+      <!-- study room events to take items radio -->
+      <input type="radio" class="trigger-radio study-room-item-cupboard-key-radio" name="study-room-item-cupboard-key"
+        id="study-room-item-cupboard-key" />
+      <input type="radio" class="trigger-radio study-room-item-front-door-key-radio"
+        name="study-room-item-front-door-key" id="study-room-item-front-door-key" />
+
+      <!-- secret room interaction radio -->
+      <input type="radio" class="trigger-radio secret-room-turn-on-power-radio" name="secret-room-turn-on-power-event"
+        id="secret-room-turn-on-power-event" />
+      <input type="radio" class="trigger-radio secret-room-chest-locked-radio" name="secret-room-chest-locked-event"
+        id="secret-room-chest-locked-event" />
+      <input type="radio" class="trigger-radio secret-room-chest-unlocked-radio" name="secret-room-chest-unlocked-event"
+        id="secret-room-chest-unlocked-event" />
+
+      <!-- secret room events to take items -->
+      <input type="radio" class="trigger-radio secret-room-item-symbol-part-2-radio"
+        name="secret-room-item-symbol-part-2" id="secret-room-item-symbol-part-2" />
+
+      <!-- item description switcher -->
+      <!-- BEDROOM -->
+      <input type="radio" class="item-description-radio bedroom-paperball-1-description-radio" name="item-description"
+        id="bedroom-paperball-1-description" />
+      <input type="radio" class="item-description-radio bedroom-paperball-2-description-radio" name="item-description"
+        id="bedroom-paperball-2-description" />
+      <input type="radio" class="item-description-radio bedroom-key-description-radio" name="item-description"
+        id="bedroom-key-description" />
+      <input type="radio" class="item-description-radio item-mouse-spray-description-radio" name="item-description"
+        id="item-mouse-spray-description" />
+
+      <!-- KITCHEN -->
+      <input type="radio" class="item-description-radio item-paperball-1-trash-description-radio"
+        name="item-description" id="item-paperball-1-trash-description" />
+      <input type="radio" class="item-description-radio item-paperball-2-trash-description-radio"
+        name="item-description" id="item-paperball-2-trash-description" />
+      <input type="radio" class="item-description-radio item-can-trash-description-radio" name="item-description"
+        id="item-can-trash-description" />
+      <input type="radio" class="item-description-radio item-fish-bone-trash-description-radio" name="item-description"
+        id="item-fish-bone-trash-description" />
+      <input type="radio" class="item-description-radio item-study-room-key-description-radio" name="item-description"
+        id="item-study-room-key-description" />
+      <input type="radio" class="item-description-radio item-battery-description-radio" name="item-description"
+        id="item-battery-description" />
+      <input type="radio" class="item-description-radio item-symbol-part-1-description-radio" name="item-description"
+        id="item-symbol-part-1-description" />
+
+      <!-- LIVING ROOM -->
+      <input type="radio" class="item-description-radio item-picture-description-radio" name="item-description"
+        id="item-picture-description" />
+      <input type="radio" class="item-description-radio item-living-room-document-1-description-radio"
+        name="item-description" id="item-living-room-document-1-description" />
+      <input type="radio" class="item-description-radio item-hat-description-radio" name="item-description"
+        id="item-hat-description" />
+      <input type="radio" class="item-description-radio item-remote-description-radio" name="item-description"
+        id="item-remote-description" />
+      <input type="radio" class="item-description-radio item-chest-key-description-radio" name="item-description"
+        id="item-chest-key-description" />
+
+      <!-- STUDY ROOM -->
+      <input type="radio" class="item-description-radio item-cupboard-key-description-radio" name="item-description"
+        id="item-cupboard-key-description" />
+      <input type="radio" class="item-description-radio item-front-door-key-description-radio" name="item-description"
+        id="item-front-door-key-description" />
+
+      <!-- SECRET ROOM -->
+      <input type="radio" class="item-description-radio item-symbol-part-2-description-radio" name="item-description"
+        id="item-symbol-part-2-description" />
+
+      <input type="radio" class="scene-1-room-radio" name="scene-1-room" id="scene-1-room-1" checked />
+      <div class="scene-1-room scene-1-room-1">
+        <div class="scene-1-label">Bedroo<span class="last">m</span></div>
+
+        <span class="scene-1-nav-1">
+          <input type="reset" value="&#8634;" /><label for="scene-1-room-2">▶</label>
+        </span>
+
+        <!-- BEDROOM OBJECTS -->
+        <!-- bedroom switch -->
+        <label class="switch" for="bedroom-lamp" style="--object-x: 230px; --object-y: 150px">
+          <img src="assets/objects/switch.svg" alt />
+        </label>
+
+        <!-- bedroom door -->
+        <label class="door-right-side-room" for="scene-1-room-2" style="--object-x: 278px; --object-y: 190px"></label>
+        <label class="door-right-side" for="open-door-event" style="--object-x: 273px; --object-y: 176px">
+          <img src="assets/objects/door.svg" alt />
+        </label>
+        <label class="door-right-side door-right-side-locked" for="door-locked-event"
+          style="--object-x: 273px; --object-y: 176px">
+          <img src="assets/objects/door.svg" alt />
+        </label>
+
+        <!-- bedroom secret room -->
+        <label class="secret-room-path" for="scene-1-room-5" style="--object-x: 45px; --object-y: 252px"></label>
+        <div class="secret-room-closed" style="--object-x: 40px; --object-y: 247px"></div>
+
+        <!-- bedroom bed -->
+        <div class="bed" style="--object-x: 100px; --object-y: 170px">
+          <img src="assets/objects/bed.svg" alt />
+        </div>
+
+        <!-- hat stand -->
+        <div class="hat-stand" style="--object-x: 201px; --object-y: 135px">
+          <img src="assets/objects/hat-stand.svg" alt />
+        </div>
+        <label class="hat-stand hat-stand-action" for="bedroom-place-hat-event"
+          style="--object-x: 201px; --object-y: 135px"></label>
+        <div class="hat hat-on-stand" style="--object-x: 204px; --object-y: 120px">
+          <img src="assets/objects/hat.svg" alt />
+        </div>
+
+        <!-- bedroom cupboard -->
+        <label class="cupboard cupboard-open" for="bedroom-cupboard-1" style="--object-x: 35px; --object-y: 190px">
+          <img src="assets/objects/cupboard-open.svg" alt />
+        </label>
+        <label class="spray mouse-spray" for="bedroom-item-mouse-spray" style="--object-x: 40px; --object-y: 212px">
+          <img src="assets/objects/mouse-spray.svg" alt />
+        </label>
+        <label class="paperball paperball-cupboard" for="bedroom-item-paperball-2"
+          style="--object-x: 55px; --object-y: 215px">
+          <img src="assets/objects/paper-ball2.svg" alt />
+        </label>
+        <label class="cupboard cupboard-closed" for="bedroom-cupboard-1" style="--object-x: 35px; --object-y: 190px">
+          <img src="assets/objects/cupboard.svg" alt />
+        </label>
+
+        <!-- key inside the vase -->
+        <label class="key-vertical" for="bedroom-item-key" style="--object-x: 40px; --object-y: 180px">
+          <img src="assets/objects/bedroom-key.svg" alt />
+        </label>
+
+        <!-- flower inside the vase -->
+        <div class="flower" style="--object-x: 70px; --object-y: 180px">
+          <img src="assets/objects/flower1.svg" alt />
+        </div>
+
+        <!-- bedroom vases -->
+        <label class="vase" for="bedroom-vase-1-switch" style="--object-x: 35px; --object-y: 170px">
+          <img src="assets/objects/vase.svg" alt />
+        </label>
+        <label class="vase" for="bedroom-vase-2-switch" style="--object-x: 65px; --object-y: 170px">
+          <img src="assets/objects/vase.svg" alt />
+        </label>
+
+        <!-- paper ball under the bed -->
+        <label class="paperball paperball-under-bed" for="bedroom-item-paperball-1"
+          style="--object-x: 170px; --object-y: 250px">
+          <img src="assets/objects/paper-ball.svg" alt />
+        </label>
+
+        <!-- bedroom turned off -->
+        <div class="scene-1-room room-dark">
+          <label class="switch" for="bedroom-lamp" style="--object-x: 230px; --object-y: 150px"></label>
+        </div>
+
+        <!-- bedroom message triggers -->
+        <div class="room-message-board message-trigger-bedroom-turn-off">
+          <span>This place is so dark. I need some light so I can see where am
+            I<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-bedroom-turn-on">
+          <span>Finally I can turn on the light. It seems like a bedroom. I need
+            to get out of here<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-bedroom-locked">
+          <span>Oh, no! The door's locked. Now where can I find the key?<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-paperball-taken">
+          <span>There's a paper ball under the bed. I wonder something useful in
+            this paper (click the paper to see description)<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-bedroom-key-taken">
+          <span>Finally got a bedroom key. Now I can open this door with this
+            key<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-bedroom-unlocked">
+          <span>The key works. Now the door's unlocked and I can get out<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-secret-room-unlocked">
+          <span>After putting hat on the hat stand, suddenly the floor moved and
+            the secret room unlocked. Let's find out<span class="last">.</span></span>
+        </div>
+      </div>
+
+      <!-- ROOM 2 - KITCHEN -->
+      <input type="radio" class="scene-1-room-radio" name="scene-1-room" id="scene-1-room-2" />
+      <div class="scene-1-room scene-1-room-2">
+        <div class="scene-1-label">Kitche<span class="last">n</span></div>
+
+        <span class="scene-1-nav-2">
+          <input type="reset" value="&#8634;" /><label for="scene-1-room-1">◀</label><label
+            for="scene-1-room-3">▶</label>
+        </span>
+
+        <!-- kitchen left side door to bedroom -->
+        <label class="door-left-side-room" for="scene-1-room-1" style="--object-x: 8px; --object-y: 227px"></label>
+        <div class="door-left-side" style="--object-x: 17px; --object-y: 203px">
+          <img src="assets/objects/door.svg" alt />
+        </div>
+
+        <!-- kitchen fridge -->
+        <div class="fridge" style="--object-x: 5px; --object-y: 118px">
+          <img src="assets/objects/fridge.svg" alt />
+        </div>
+
+        <!-- kitchen trash bin and inteactions trigger -->
+        <div class="trash-bin" style="--object-x: 220px; --object-y: 188px">
+          <img src="assets/objects/trash-bin.svg" alt />
+        </div>
+        <label class="trash-bin-opener trash-bin-for-fish-bone-trash" for="kitchen-put-fish-bone-trash-event"
+          style="--object-x: 226px; --object-y: 188px"></label>
+        <label class="trash-bin-opener trash-bin-for-can-trash" for="kitchen-put-can-trash-event"
+          style="--object-x: 226px; --object-y: 188px"></label>
+        <label class="trash-bin-opener trash-bin-for-paper-ball-2-trash" for="kitchen-put-paper-ball-2-trash-event"
+          style="--object-x: 226px; --object-y: 188px"></label>
+        <label class="trash-bin-opener trash-bin-for-paper-ball-1-trash" for="kitchen-put-paper-ball-1-trash-event"
+          style="--object-x: 226px; --object-y: 188px"></label>
+
+        <!-- kitchen oven -->
+        <div class="oven" style="--object-x: 105px; --object-y: 143px">
+          <img src="assets/objects/oven.svg" alt />
+        </div>
+
+        <!-- kitchen stove -->
+        <div class="stove-fire" style="--object-x: 175px; --object-y: 142px">
+          <img src="assets/objects/stove-fire.svg" alt />
+        </div>
+        <label class="gas-stove" for="kitchen-stove-switch" style="--object-x: 170px; --object-y: 152px">
+          <img src="assets/objects/gas-stove.svg" alt />
+        </label>
+
+        <!-- kitchen cabinets and items inside them -->
+        <div class="cabinet cabinet-open-1" style="--object-x: 100px; --object-y: 180px">
+          <img src="assets/objects/cabinet-open.svg" alt />
+        </div>
+        <div class="cabinet cabinet-open-2" style="--object-x: 160px; --object-y: 180px">
+          <img src="assets/objects/cabinet-open.svg" alt />
+        </div>
+        <label class="battery" for="kitchen-item-battery" style="--object-x: 103px; --object-y: 194px">
+          <img src="assets/objects/battery.svg" alt />
+        </label>
+        <label class="symbol-part" for="kitchen-item-symbol-part" style="--object-x: 133px; --object-y: 194px">
+          <img src="assets/objects/symbol-part-1.svg" alt />
+        </label>
+        <label class="cabinet cabinet-1" for="kitchen-open-cabinet-1-event"
+          style="--object-x: 100px; --object-y: 180px">
+          <img src="assets/objects/cabinet.svg" alt />
+        </label>
+        <div class="cabinet cabinet-1-locked" style="--object-x: 100px; --object-y: 180px"></div>
+        <div class="cabinet cabinet-2" style="--object-x: 160px; --object-y: 180px">
+          <img src="assets/objects/cabinet.svg" alt />
+        </div>
+
+        <!-- kitchen trash -->
+        <label class="mess paper-ball-1-trash" for="kitchen-item-paper-ball-1-trash"
+          style="--object-x: 120px; --object-y: 250px">
+          <img src="assets/objects/paper-ball.svg" alt />
+        </label>
+        <label class="mess paper-ball-2-trash" for="kitchen-item-paper-ball-2-trash"
+          style="--object-x: 80px; --object-y: 270px">
+          <img src="assets/objects/paper-ball2.svg" alt />
+        </label>
+        <label class="mess can-trash" for="kitchen-item-can-trash" style="--object-x: 250px; --object-y: 270px">
+          <img src="assets/objects/can.svg" alt />
+        </label>
+        <label class="mess fish-bone-trash" for="kitchen-item-fish-bone-trash"
+          style="--object-x: 190px; --object-y: 240px">
+          <img src="assets/objects/fishbone.svg" alt />
+        </label>
+
+        <!-- mouse and interactions -->
+        <label class="mouse" for="kitchen-kill-mouse-event" style="--object-x: 260px; --object-y: 230px">
+          <img src="assets/objects/mouse.svg" alt />
+        </label>
+        <div class="mouse mouse-locked" style="--object-x: 260px; --object-y: 230px"></div>
+        <label class="study-room-key" for="kitchen-item-study-room-key" style="--object-x: 260px; --object-y: 237px">
+          <img src="assets/objects/study-room-key.svg" alt />
+        </label>
+
+        <!-- kitchen switch -->
+        <label class="switch" for="kitchen-lamp" style="--object-x: 230px; --object-y: 150px">
+          <img src="assets/objects/switch.svg" alt />
+        </label>
+
+        <!-- kitchen turned off -->
+        <div class="scene-1-room room-dark">
+          <label class="switch" for="kitchen-lamp" style="--object-x: 230px; --object-y: 150px"></label>
+        </div>
+
+        <!-- kitchen message triggers -->
+        <div class="room-message-board message-trigger-kitchen-turn-off">
+          <span>Aw, come on! Don't this room again<span class="last">!</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-turn-on">
+          <span>Lights on! Oh, look at this mess. Seems that it's cleaning up
+            time<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-all-trash-collected">
+          <span>All clear now! Now, let's put all the trash into the bin<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-all-trash-put">
+          <span>All trash have been put into the trash bin. But, wait! A mouse.
+            It brings some key. I wonder how to take the key from it<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-mouse-died">
+          <span>Thanks for the mouse spray, the mouse has been died. The key is
+            dropped from it<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-got-key">
+          <span>I got some key from the mouse. I wonder what kind of room or
+            something I can open<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-got-battery">
+          <span>I've got the battery. Seems I can make something work with
+            this<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-kitchen-got-symbol-part">
+          <span>I've got the left part of Wendo emblem. Let's find another
+            left<span class="last">.</span></span>
+        </div>
+      </div>
+
+      <!-- ROOM 3 - LIVING ROOM -->
+      <input type="radio" class="scene-1-room-radio" name="scene-1-room" id="scene-1-room-3" />
+      <div class="scene-1-room scene-1-room-3">
+        <div class="scene-1-label">Living Roo<span class="last">m</span></div>
+
+        <span class="scene-1-nav-3">
+          <input type="reset" value="&#8634;" /><label for="scene-1-room-2">◀</label><label
+            for="scene-1-room-4">▶</label>
+        </span>
+
+        <!-- front door -->
+        <label class="door-front-escape" for="ending" style="--object-x: 118px; --object-y: 162px">
+        </label>
+        <label class="door-front door-front-trigger" for="living-room-unlock-main-door-event"
+          style="--object-x: 118px; --object-y: 154px">
+          <img src="assets/objects/door.svg" alt />
+        </label>
+        <div class="door-front door-front-locked" style="--object-x: 118px; --object-y: 154px"></div>
+
+        <!-- sofa and hat -->
+        <div class="sofa" style="--object-x: 22px; --object-y: 180px">
+          <img src="assets/objects/sofa1.svg" alt />
+        </div>
+        <label class="hat" for="living-room-item-hat" style="--object-x: 36px; --object-y: 182px">
+          <img src="assets/objects/hat.svg" alt />
+        </label>
+
+        <!-- window and curtain -->
+        <label class="window" for="living-room-curtain" style="--object-x: 25px; --object-y: 100px">
+          <img src="assets/objects/window.svg" alt />
+        </label>
+        <label class="curtain" for="living-room-curtain" style="--object-x: 20px; --object-y: 92px">
+          <img src="assets/objects/curtains.svg" alt />
+        </label>
+
+        <!-- TV and interactions -->
+        <div class="tv" style="--object-x: 200px; --object-y: 160px">
+          <img src="assets/objects/tv.svg" alt />
+        </div>
+        <label class="tv-screen" for="living-room-tv-screen" style="--object-x: 204px; --object-y: 169px">
+          <label class="chest-key" for="living-room-item-chest-key" style="--object-x: 11px; --object-y: 3px">
+            <img src="assets/objects/chest-key.svg" alt />
+          </label>
+        </label>
+
+        <!-- living room shelf -->
+        <div class="living-room-shelf" style="--object-x: 190px; --object-y: 186px">
+          <img src="assets/objects/shelf.svg" alt />
+        </div>
+
+        <!-- living room paper document -->
+        <label class="paperball living-room-document-1" for="living-room-item-document-1"
+          style="--object-x: 232px; --object-y: 209px">
+          <img src="assets/objects/paper-ball2.svg" alt />
+        </label>
+
+        <!-- table -->
+        <div class="table" style="--object-x: 185px; --object-y: 226px">
+          <img src="assets/objects/table2.svg" alt />
+        </div>
+
+        <!-- remote -->
+        <label class="remote" for="living-room-item-remote" style="--object-x: 194px; --object-y: 243px">
+          <img src="assets/objects/remote.svg" alt />
+        </label>
+        <label class="remote remote-place-battery" for="living-room-remote-place-battery-event"
+          style="--object-x: 194px; --object-y: 243px">
+          <img src="assets/objects/remote.svg" alt />
+        </label>
+        <label class="remote remote-not-working" for="living-room-remote-not-working-event"
+          style="--object-x: 194px; --object-y: 243px">
+          <img src="assets/objects/remote.svg" alt />
+        </label>
+
+        <!-- picture -->
+        <label class="picture" for="living-room-item-picture" style="--object-x: 204px; --object-y: 243px">
+          <img src="assets/objects/picture.svg" alt />
+        </label>
+
+        <!-- living room right side door to study room -->
+        <label class="door-right-side-room" for="scene-1-room-4" style="--object-x: 278px; --object-y: 190px"></label>
+        <label class="door-right-side living-room-unlock-door" for="living-room-unlock-door-event"
+          style="--object-x: 273px; --object-y: 176px">
+          <img src="assets/objects/door.svg" alt />
+        </label>
+        <label class="door-right-side living-room-door-locked" for="living-room-door-locked-event"
+          style="--object-x: 273px; --object-y: 176px">
+          <img src="assets/objects/door.svg" alt />
+        </label>
+
+        <!-- living room message triggers -->
+        <div class="room-message-board message-trigger-living-room-first-time">
+          <span>Now let's see what kind of stuffs we can find in this room<span class="last">!</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-take-picture-of-wendo">
+          <span>This picture describes me Wendo key. By the way, what is
+            Wendo<span class="last">?</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-study-room-door-locked">
+          <span>This room is locked. Maybe I can find some key to open it<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-remote-not-working">
+          <span>This remote is not working to turn the TV on. Maybe I can find
+            the battery somewhere<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-study-room-door-unlocked">
+          <span>The key works! Now let's find out what stuffs are in this
+            room<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-hat-taken">
+          <span>Hello, hat. What are you doing in this sofa? Let's go to the hat
+            stand to bring you home<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-battery-plugged">
+          <span>The battery is now on remote. Now I can use the remote<span class="last">.</span></span>
+        </div>
+
+        <div class="room-message-board message-trigger-living-room-main-door-unlocked">
+          <span>Horray! The main door is unlocked. Now it's time for escape<span class="last">.</span></span>
+        </div>
+      </div>
+
+      <!-- ROOM 4 - STUDY ROOM -->
+      <input type="radio" class="scene-1-room-radio" name="scene-1-room" id="scene-1-room-4" />
+      <div class="scene-1-room scene-1-room-4">
+        <div class="scene-1-label">Study Roo<span class="last">m</span></div>
+
+        <span class="scene-1-nav-4">
+          <input type="reset" value="&#8634;" /><label for="scene-1-room-3">◀</label>
+        </span>
+
+        <!-- study room left side room to living room -->
+        <label class="door-left-side-room" for="scene-1-room-3" style="--object-x: 8px; --object-y: 227px"></label>
+        <div class="door-left-side" style="--object-x: 17px; --object-y: 203px">
+          <img src="assets/objects/door.svg" alt />
+        </div>
+
+        <!-- bookshelf and secret -->
+        <div class="bookshelf-secret" style="--object-x: 64px; --object-y: 147px"></div>
+        <label class="front-door-key" for="study-room-item-front-door-key" style="--object-x: 95px; --object-y: 207px">
+          <img src="assets/objects/front-door-key.svg" alt />
+        </label>
+        <div class="bookshelf" style="--object-x: 54px; --object-y: 138px">
+          <img src="assets/objects/bookshelf.svg" alt />
+        </div>
+
+        <!-- study room table -->
+        <div class="table" style="--object-x: 170px; --object-y: 190px">
+          <img src="assets/objects/table.svg" alt />
+        </div>
+
+        <!-- book and place to put Wendo emblem -->
+        <div class="book" style="--object-x: 195px; --object-y: 185px">
+          <img src="assets/objects/book.svg" alt />
+        </div>
+        <label class="emblem-put emblem-put-left" for="study-room-put-symbol-part-1-event"
+          style="--object-x: 200px; --object-y: 189px">
+        </label>
+        <div class="emblem-put emblem-put-left-installed" style="--object-x: 200.7px; --object-y: 188.1px">
+          <img src="assets/objects/symbol-part-1.svg" alt />
+        </div>
+        <div class="emblem-put emblem-put-left-locked" style="--object-x: 200px; --object-y: 189px"></div>
+        <label class="emblem-put emblem-put-right" for="study-room-put-symbol-part-2-event"
+          style="--object-x: 210px; --object-y: 189px">
+        </label>
+        <label class="emblem-put emblem-put-right-installed" for="study-room-check-empty-symbol-event"
+          style="--object-x: 209.4px; --object-y: 188.1px">
+          <img src="assets/objects/symbol-part-2.svg" alt />
+        </label>
+        <label class="emblem-put emblem-put-right-locked" for="study-room-check-empty-symbol-event"
+          style="--object-x: 210px; --object-y: 189px">
+        </label>
+
+        <!-- cupboard key -->
+        <label class="key cupboard-key" for="study-room-item-cupboard-key" style="--object-x: 246px; --object-y: 231px">
+          <img src="assets/objects/cupboard-key.svg" alt />
+        </label>
+
+        <div class="scene-1-room room-dark"></div>
+
+        <div class="room-message-board message-trigger-study-room-turn-off">
+          <span>This room is also dark. Seems there's a switch or a power to turn
+            it on<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-study-room-turn-on">
+          <span>Power's back! Now let's explore some stuffs here<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-study-room-got-cupboard-key">
+          <span>I've got another key. Based on this key color, this key seems not
+            to be a room key<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-check-symbol-on-book">
+          <span>This book has a lost symbol in it. Maybe I need to put something
+            in it<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-study-room-bookshelf-opened">
+          <span>After I placed the Wendo emblem pieces, suddenly the bookshelf is
+            opened. I also saw a key there<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-study-room-front-door-key-taken">
+          <span>I take the key. Let's get back to living room and open the main
+            door.<span class="last">.</span></span>
+        </div>
+      </div>
+
+      <!-- ROOM 5 - SECRET ROOM -->
+      <input type="radio" class="scene-1-room-radio" name="scene-1-room" id="scene-1-room-5" />
+      <div class="scene-1-room scene-1-room-5">
+        <div class="scene-1-label">Secret Roo<span class="last">m</span></div>
+
+        <span class="scene-1-nav-5">
+          <input type="reset" value="&#8634;" /><label for="scene-1-room-1">◀</label>
+        </span>
+
+        <label class="power-switch" for="secret-room-turn-on-power-event" style="--object-x: 225px; --object-y: 150px">
+          <img src="assets/objects/power-switch.svg" alt />
+        </label>
+
+        <div class="chest-open" style="--object-x: 50px; --object-y: 161px">
+          <img src="assets/objects/chest-open.svg" alt />
+        </div>
+        <label class="symbol-part" for="secret-room-item-symbol-part-2" style="--object-x: 87px; --object-y: 177px">
+          <img src="assets/objects/symbol-part-2.svg" alt />
+        </label>
+        <label class="chest" for="secret-room-chest-unlocked-event" style="--object-x: 50px; --object-y: 172px">
+          <img src="assets/objects/chest.svg" alt />
+        </label>
+        <label class="chest chest-locked" for="secret-room-chest-locked-event"
+          style="--object-x: 50px; --object-y: 172px"></label>
+
+        <div class="room-message-board message-trigger-secret-room-first-time">
+          <span>Looks like this is a secret room. Now let see what stuff can we
+            use to escape<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-secret-room-switch-power">
+          <span>Power switched. The study room power must be restored<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-secret-room-chest-locked">
+          <span>The chest is locked. I wonder if I can open it and get a
+            gold<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-secret-room-chest-unlocked">
+          <span>Ay, Ay! Captain. We've got the treasure! I hope there's a golden
+            doublin there<span class="last">.</span></span>
+        </div>
+        <div class="room-message-board message-trigger-secret-room-got-symbol-part">
+          <span>I've got the right part of Wendo emblem. Maybe there's nothing
+            more in this chest<span class="last">.</span></span>
+        </div>
+      </div>
+
+      <div class="items-board">
+        <span>ITEM<span class="last">S</span></span>
+
+        <div class="items-list">
+          <!-- FROM BEDROOM -->
+          <label class="item-block item-paperball-1-block" for="bedroom-paperball-1-description">
+            <img src="assets/items/item-document.svg" alt />
+          </label>
+          <label class="item-block item-paperball-2-block" for="bedroom-paperball-2-description">
+            <img src="assets/items/note.svg" alt />
+          </label>
+          <label class="item-block item-bedroom-key-block" for="bedroom-key-description">
+            <img src="assets/items/bedroom-key.svg" alt />
+          </label>
+          <label class="item-block item-mouse-spray-block" for="item-mouse-spray-description">
+            <img src="assets/items/mouse-spray.svg" alt />
+          </label>
+
+          <!-- FROM KITCHEN -->
+          <label class="item-block item-paperball-1-trash-block" for="item-paperball-1-trash-description">
+            <img src="assets/items/paper-ball.svg" alt />
+          </label>
+          <label class="item-block item-paperball-2-trash-block" for="item-paperball-2-trash-description">
+            <img src="assets/items/paper-ball2.svg" alt />
+          </label>
+          <label class="item-block item-can-trash-block" for="item-can-trash-description">
+            <img src="assets/items/can.svg" alt />
+          </label>
+          <label class="item-block item-fish-bone-trash-block" for="item-fish-bone-trash-description">
+            <img src="assets/items/fishbone.svg" alt />
+          </label>
+          <label class="item-block item-study-room-key-block" for="item-study-room-key-description">
+            <img src="assets/items/study-room-key.svg" alt />
+          </label>
+          <label class="item-block item-battery-block" for="item-battery-description">
+            <img src="assets/items/battery.svg" alt />
+          </label>
+          <label class="item-block item-symbol-part-1-block" for="item-symbol-part-1-description">
+            <img src="assets/items/symbol-part-1.svg" alt />
+          </label>
+
+          <!-- FROM LIVING ROOM -->
+          <label class="item-block item-living-room-document-1-block" for="item-living-room-document-1-description">
+            <img src="assets/items/item-document.svg" alt />
+          </label>
+          <label class="item-block item-picture-block" for="item-picture-description">
+            <img src="assets/items/picture.svg" alt />
+          </label>
+          <label class="item-block item-hat-block" for="item-hat-description">
+            <img src="assets/items/hat.svg" alt />
+          </label>
+          <label class="item-block item-remote-block" for="item-remote-description">
+            <img src="assets/items/remote.svg" alt />
+          </label>
+          <label class="item-block item-chest-key-block" for="item-chest-key-description">
+            <img src="assets/items/chest-key.svg" alt />
+          </label>
+
+          <!-- FROM STUDY ROOM -->
+          <label class="item-block item-cupboard-key-block" for="item-cupboard-key-description">
+            <img src="assets/items/cupboard-key.svg" alt />
+          </label>
+          <label class="item-block item-front-door-key-block" for="item-front-door-key-description">
+            <img src="assets/items/front-door-key.svg" alt />
+          </label>
+
+          <!-- FROM SECRET ROOM -->
+          <label class="item-block item-symbol-part-2-block" for="item-symbol-part-2-description">
+            <img src="assets/items/symbol-part-2.svg" alt />
+          </label>
+        </div>
+      </div>
+
+      <!-- items description board -->
+      <!-- BEDROOM -->
+      <div class="items-description-board paperball-1-description">
+        <span>
+          <strong>Paper ball document</strong><br />
+          <br />
+          There's something written in this paper.<br />
+          <br />
+          <em>
+            There is a key to get out of the bedroom. You need to find it
+            inside the vase (I don't know which vase has the key) and use it
+            for the first step to escape.<br />
+            <br />
+            Letter code: #6792
+          </em>
+        </span>
+      </div>
+      <div class="items-description-board paperball-2-description">
+        <span>
+          <strong>MOUSTICIDE brochure</strong><br />
+          <br />
+          This brochure contains the procedure how to use the mouse pest<br />
+          <br />
+          <em>
+            MOUSTICIDE - Peppermint flavour<br />
+            <br />
+            For killing the mouse, just give them a spray and they will be
+            killed for instant. It is also effective for other rodents.<br />
+            <br />
+            It also have noni fruit variant. Try it now!
+          </em>
+        </span>
+      </div>
+      <div class="items-description-board bedroom-key-description">
+        <span>
+          <strong>Bedroom key</strong><br />
+          <br />
+          Seems it's useful for open the bedroom door.
+        </span>
+      </div>
+      <div class="items-description-board item-mouse-spray-description">
+        <span>
+          <strong>Mouse-spray</strong><br />
+          <br />
+          For killing mouse in just a little spray.
+        </span>
+      </div>
+
+      <!-- KITCHEN -->
+      <div class="items-description-board item-paperball-1-trash-description">
+        <span>
+          <strong>Paper trash #1</strong><br />
+          <br />
+          This paper is a trash. Let's put it into the trash bin.
+        </span>
+      </div>
+      <div class="items-description-board item-paperball-2-trash-description">
+        <span>
+          <strong>Paper trash #2</strong><br />
+          <br />
+          Hello, Mr. paper trash. Let's put you into your home. I mean, trash
+          bin.
+        </span>
+      </div>
+      <div class="items-description-board item-can-trash-description">
+        <span>
+          <strong>Can trash</strong><br />
+          <br />
+          This can was a coke drink. Seeing this thing makes me thirsty
+          anyway.
+        </span>
+      </div>
+      <div class="items-description-board item-fish-bone-trash-description">
+        <span>
+          <strong>Fish bone</strong><br />
+          <br />
+          Hello, Mr. Fishbone. Did cat bring you here again? Should I bring
+          you back to aquarium?
+        </span>
+      </div>
+      <div class="items-description-board item-study-room-key-description">
+        <span>
+          <strong>Study room key</strong><br />
+          <br />
+          I've got this key from the mouse. Maybe it can be used for unlock
+          another room.
+        </span>
+      </div>
+      <div class="items-description-board item-battery-description">
+        <span>
+          <strong>Battery</strong><br />
+          <br />
+          A2 Battery. Brings the electronic device back to life.
+        </span>
+      </div>
+      <div class="items-description-board item-symbol-part-1-description">
+        <span>
+          <strong>Wendo emblem (left part)</strong><br />
+          <br />
+          This is a left part of Wendo emblem to unlock the hidden treasure.
+        </span>
+      </div>
+
+      <!-- LIVING ROOM -->
+      <div class="items-description-board item-picture-description">
+        <span>
+          <strong>Picture of Wendo</strong><br />
+          <br />
+          This picture describes the symbol of Wendo.<br />
+          <img src="assets/objects/picture-of-wendo.svg" alt style="width: 100px" /><br />
+          <br />
+          There are also some note:<br />
+          <br />
+          <em>
+            Wendo is the a symbol that will be the one key for you to escape.
+            There are two pieces of symbol, left part and right part. One part
+            is located on the cupboard (I don't know which cupboard), and I
+            forgot where's another pieces located. The rest of the symbol
+            piece will be your homework to find it.<br />
+            <br />
+            Good luck!<br />
+            <br />
+            Letter code: #1823
+          </em>
+        </span>
+      </div>
+      <div class="items-description-board item-living-room-document-1-description">
+        <span>
+          <strong>Document about the working room</strong><br />
+          <br />
+          This document is written below.<br />
+          <br />
+          <em>
+            I always works on my working room, which is located beside of this
+            room, but this room is out of a power. The power is located in
+            somewhere hidden. You need some thing to discover that place.<br />
+            <br />
+            Hint: Do you think some outfit I usually wear outside? That's the
+            key to open the secret place.<br />
+            <br />
+            Letter code: #1824
+          </em>
+        </span>
+      </div>
+      <div class="items-description-board item-hat-description">
+        <span>
+          <strong>Hat</strong><br />
+          <br />
+          A fashionable hat.
+        </span>
+      </div>
+      <div class="items-description-board item-remote-description">
+        <span>
+          <strong>Remote</strong><br />
+          <br />
+          Multi-purposes TV remote. Brings you to all your favorite channel.
+          Just one fingertips on your remote and your TV is magically on.
+        </span>
+      </div>
+      <div class="items-description-board item-chest-key-description">
+        <span>
+          <strong>Chest key</strong><br />
+          <br />
+          Just need to find the treasure chest to make this useful. Ahoy!
+        </span>
+      </div>
+
+      <!-- STUDY ROOM -->
+      <div class="items-description-board item-cupboard-key-description">
+        <span>
+          <strong>Cupboard key</strong><br />
+          <br />
+          Based on key color, it seems that it belongs in kitchen.
+        </span>
+      </div>
+      <div class="items-description-board item-front-door-key-description">
+        <span>
+          <strong>Front door key</strong><br />
+          <br />
+          Seems can be used for open the main door and get the fresh air
+          outside.
+        </span>
+      </div>
+
+      <!-- SECRET ROOM -->
+      <div class="items-description-board item-symbol-part-2-description">
+        <span>
+          <strong>Wendo emblem (right part)</strong><br />
+          <br />
+          This is a right part of Wendo emblem to unlock the hidden treasure.
+        </span>
+      </div>
+    </form>
+
+    <input type="radio" name="scene" class="scene-radio" id="ending" />
+    <div class="scene ending">
+      <span class="ending-label">
+        ABRACADABRA~~~<span class="last">~</span>
+      </span>
+
+      <span class="ending-label">
+        Congratulations! You escaped from the house<span class="last">!</span>
+      </span>
+
+    </div>
+
+    <div class="scene scene-closure-bottom"></div>
+    <div class="scene scene-closure-left"></div>
+    <div class="scene scene-closure-right"></div>
+  </div>
+  <script>
+    var sndGame = new Howl({
+      src: ['assets/game.mp3']
+    });
+    document.onclick = function (){
+      sndGame.play()
+    }
+    </script>
+</body>
+
+</html>
