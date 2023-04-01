@@ -67,13 +67,13 @@ function renderB() {
 
 setVisible('.splash', true);
 setVisible('.april', false);
-let user = getCookie("ancient-desert");
+let user = getCookie("april-desert");
 
 window.addEventListener('DOMContentLoaded', (event) => {
   if (user !== "") {
     setVisible('.splash', true);
   } else {
-    setCookie("ancient-desert", user, 7);
+    setCookie("april-desert", user, 7);
     setVisible('.splash', true);
     renderA();
     wait(9500).then(() => {
