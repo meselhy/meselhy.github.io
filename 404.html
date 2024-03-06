@@ -5,55 +5,14 @@
   <!-- Required Meta Tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-  <!--  Title -->
-  <title>ops!</title>
-  <style>
-    body {
-        background-color: #1d2931;
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        margin-top: 25vh;
-    }
-    .error {
-        color: #BE514D;
-        text-align: center;
-        font-family: monospace;
-        font-size: 3.5vh;
-    }
-    a {
-        color: #d0b695;
-        text-align: center;
-        font-family: monospace;
-        font-size: 2.5vh;
-    }
-  </style>
-  <script defer src="/assets/script/jquery-3.6.1.min.js" ></script>
 </head>
 
 <body>
-    <video autoplay loop muted playsinline width="200" height="200" alt="Error 404">
-        <source src="/assets/img/error.webm" type="video/webm">
-    </video>
-    <div class="error"></div>
     
     <script>
-        var $element = $('.error');
-        var isTag, char, text, i=0;
-        function render() {
-            var err = '<p>Hey human! you are in nowhere</p><br><a href="index.html">Head to somewhere ☛</a>';
-            text = err.slice(0, i++);
-            if (text === err) return i = 0;
-            $element.html(text + '&#x2759;');
-            char = text.slice(-1);
-            if (char === '<') isTag = true;
-            if (char === '>') isTag = false;
-            if (isTag) return render();
-            return setTimeout(render, 80);
-        }
-        render();
+        <script>
+        window.location.href = "/ops.html";
+    </script>
       </script>
 </body>
 
