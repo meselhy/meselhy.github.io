@@ -144,7 +144,18 @@ $(document).ready(function () {
         renderMsg("Black magic! " + message);
         e.stopImmediatePropagation();
       }
-      $.ajax({
+      emailjs.sendForm('service_gmail', 'template_contact', this)
+        .then(() => {
+          renderMsg("Thank you, I will be in touch with you shortly");
+          wait(800).then(() => {
+            $('#contactme').trigger("reset");
+          })
+          e.stopImmediatePropagation();
+        }, (error) => {
+          renderMsg("OPS " + error);
+          e.stopImmediatePropagation();
+      });
+/*       $.ajax({
         type: "POST",
         url: "contact.php",
         data: "name=" + name + "&email=" + email + "&message=" + message,
@@ -156,7 +167,7 @@ $(document).ready(function () {
           })
           e.stopImmediatePropagation();
         }
-      });
+      }); */
     } else {
       renderMsg("Aliens are not welcomed " + email);
       e.stopImmediatePropagation();
@@ -333,7 +344,7 @@ $(function () {
       x++;
       return render();
     } else if (z === "p") {
-      htmlOutput = '<div class="subcontent"><div class="mpost"><h3><span class="orange">' + data[5].a + '</span><span class="offblue">' + data[5].b + '</span><span class="yellow">' + data[5].c + '</span><span class="offblue"><i>' + data[5].d + '</i></span><span class="yellow">' + data[5].e + '</span><span class="white">' + data[5].f + '</span></h3><h4><span class="orange">' + data[5].g + '</span><span class="yellow">' + data[5].h + '</span><span class="white">' + data[5].f + '</span></h4><h6><span class="pink">' + data[5].i + '</span></h6><form id="contactme" method="POST"><h5><label class="orange">' + data[5].j + '</label><br><input type="text" name="name" class="mspost" id="name"></h5><h5><label class="orange">' + data[5].k + '</label><br><input type="email" name="email" class="mspost" id="email"></h5><h5><label class="orange">' + data[5].l + '</label><br><textarea cols="20" rows="5" name="message" class="mspost" id="message"></textarea></h5><button class="blue blur blur-text" type="button" accesskey="p" id="btnMail">' + data[5].o + '</button><h6><span class="pink">' + data[5].m + '</span></h6><h5 id="mrespond"></h5></form></div></div>';
+      htmlOutput = '<div class="subcontent"><div class="mpost"><h3><span class="orange">' + data[5].a + '</span><span class="offblue">' + data[5].b + '</span><span class="yellow">' + data[5].c + '</span><span class="offblue"><i>' + data[5].d + '</i></span><span class="yellow">' + data[5].e + '</span><span class="white">' + data[5].f + '</span></h3><h4><span class="orange">' + data[5].g + '</span><span class="yellow">' + data[5].h + '</span><span class="white">' + data[5].f + '</span></h4><h6><span class="pink">' + data[5].i + '</span></h6><form id="contactme"><h5><label class="orange">' + data[5].j + '</label><br><input type="text" name="name" class="mspost" id="name"></h5><h5><label class="orange">' + data[5].k + '</label><br><input type="email" name="email" class="mspost" id="email"></h5><h5><label class="orange">' + data[5].l + '</label><br><textarea cols="20" rows="5" name="message" class="mspost" id="message"></textarea></h5><button class="blue blur blur-text" type="button" accesskey="p" id="btnMail">' + data[5].o + '</button><h6><span class="pink">' + data[5].m + '</span></h6><h5 id="mrespond"></h5></form></div></div>';
       x++;
       return render();
     } else {
