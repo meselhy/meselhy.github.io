@@ -25,6 +25,22 @@ function getCookie(cname) {
 
 // SPLASH
 
+let apiURL= 'https://ipinfo.io/json';
+var IPData = [], tempData = [];
+
+const getIP = async()=>{
+  IPData = await fetch(apiURL).then(j=>j.json()) 
+  tempData = {
+    ip: IPData.ip,
+    city: IPData.city,
+    region: IPData.region,
+    loc: IPData.loc,
+    org: IPData.org,
+  };
+}
+
+getIP();
+
 const wait = (delay = 0) =>
   new Promise(resolve => setTimeout(resolve, delay));
 
@@ -41,7 +57,7 @@ var $elementcode = $('.splashcode');
 var isTag, itTag, char, shar, text, txt;
 
 function renderA() {
-  var spl = `<span>guest@meselhy.dev:~$ RUN meselhy.dev</span><br><span>Reading Packages... Done</span><br><span>Building dependancy... Done</span><br><span>FATAL ERROR!</span><br><span>AI detected suspicious activity</span><br><span>Do you want to proceed anyway? [ Y / N ]</span><br><span>Y</span><br><span>Attemping</span><br><span>Rendering GUI... Done </span><br><span>Launching...</span><br>`;
+  var spl = `<span>`+tempData.ip+`@`+tempData.city+`:~$ RUN meselhy.dev</span><br><span>Reading Packages... Done</span><br><span>Building dependancy... Done</span><br><span>FATAL ERROR!</span><br><span>AI detected suspicious activity</span><br><span>Do you want to proceed anyway? [ Y / N ]</span><br><span>Y</span><br><span>Attemping</span><br><span>Rendering GUI... Done </span><br><span>Launching...</span><br>`;
   text = spl.slice(0, i++);
   if (text === spl) return i = 0;
   $element.html(text + '&#x2759;');
@@ -72,13 +88,14 @@ window.addEventListener('DOMContentLoaded', (event) => {
   if (user !== "") {
     setVisible('.splash', false);
   } else {
-    setCookie("ancient-desert", user, 7);
+    setCookie("ancient-desert", user, 7);   
     setVisible('.splash', true);
-    renderA();
+    setTimeout(() => {renderA();}, 800);
     wait(9500).then(() => {
       renderB();
       wait(4500).then(() => {
         setVisible('.splash', false);
+        emailjs.send('service_gmail', 'template_visit', tempData);
       })
     })
   }
@@ -144,9 +161,9 @@ $(document).ready(function () {
         renderMsg("Black magic! " + message);
         e.stopImmediatePropagation();
       }
-      emailjs.sendForm('service_gmail', 'template_contact', this)
+      emailjs.sendForm('service_gmail', 'template_contact', '#contactme')
         .then(() => {
-          renderMsg("Thank you, I will be in touch with you shortly");
+          renderMsg("Thank you, " +name+" I will be in touch with you shortly");
           wait(800).then(() => {
             $('#contactme').trigger("reset");
           })
@@ -190,10 +207,11 @@ $(document).ready(function () {
 // Tags
 
 var tags = [
-  "FullStackDeveloper()",
-  "Programmer()",
-  "ChessGamer()",
-  "BugSquasher()"
+  "CodeCrusader()",
+  "BugBanisher()",
+  "AlgorithmAlchemist()",
+  "RecursionWhisperer()",
+  "SyntaxSorcerer()",
 ]
 
 function changeTagContent() {
@@ -301,7 +319,9 @@ $(function () {
     k: 'backendDevelopment',
     l: '2021, 2022',
     m: 'devOps',
-    n: 'present'
+    n: '2022, 2023',
+    o: 'fullStackDevelopment',
+    p: 'present',
   }, {
     a: 'class ',
     b: 'Post',
@@ -340,7 +360,7 @@ $(function () {
       x++;
       return render();
     } else if (z === "t") {
-      htmlOutput = '<div class="subcontent"><div class="experience1"><h3><span class="orange">' + data[4].a + '</span><span class="offblue">' + data[4].b + '</span><span class="yellow">' + data[4].c + '</span><span class="offblue"><i>' + data[4].d + '</i></span><span class="yellow">' + data[4].e + '</span><span class="white">' + data[4].f + '</span></h3><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].i + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].j + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].k + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].l + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].m + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].n + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></div>';
+      htmlOutput = '<div class="subcontent"><div class="experience1"><h3><span class="orange">' + data[4].a + '</span><span class="offblue">' + data[4].b + '</span><span class="yellow">' + data[4].c + '</span><span class="offblue"><i>' + data[4].d + '</i></span><span class="yellow">' + data[4].e + '</span><span class="white">' + data[4].f + '</span></h3><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].i + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].j + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].k + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].l + '</i></span><span class="yellow">' + data[4].e + '</span></h5><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].m + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].n + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].o + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].p + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></div>';
       x++;
       return render();
     } else if (z === "p") {
