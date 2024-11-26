@@ -25,19 +25,20 @@ function getCookie(cname) {
 
 // SPLASH
 
-let apiURL= 'https://ipinfo.io/json';
+let apiURL = 'http://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
+
 var IPData = [], tempData = [];
 
-const getIP = async()=>{
-  IPData = await fetch(apiURL).then(j=>j.json()) 
+const getIP = async () => {
+  IPData = await fetch(apiURL).then(response => response.json());
   tempData = {
     ip: IPData.ip,
     city: IPData.city,
-    region: IPData.region,
-    loc: IPData.loc,
-    org: IPData.org,
+    region: IPData.region_name,
+    loc: IPData.latitude + ',' + IPData.longitude,
+    org: IPData.ip_routing_type + ',' + IPData.connection_type,
   };
-}
+};
 
 getIP();
 
