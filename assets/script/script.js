@@ -89,18 +89,35 @@ window.addEventListener('DOMContentLoaded', (event) => {
   if (user !== "") {
     setVisible('.splash', false);
   } else {
-    setCookie("ancient-desert", user, 7);   
+    setCookie("ancient-desert", user, 7);
     setVisible('.splash', true);
-    setTimeout(() => {renderA();}, 800);
-    wait(9500).then(() => {
-      renderB();
-      wait(4500).then(() => {
+
+    // Start the rendering sequence
+    startRenderSequence()
+      .then(() => {
         setVisible('.splash', false);
         emailjs.send('service_gmail', 'template_visit', tempData);
       })
-    })
+      .catch((error) => console.error("An error occurred during rendering:", error));
   }
 });
+
+function startRenderSequence() {
+  return new Promise((resolve, reject) => {
+    try {
+      setTimeout(() => {
+        renderA();
+        wait(9000).then(() => {
+          renderB();
+          wait(4000).then(resolve);
+        });
+      }, 800);
+    } catch (error) {
+      reject(error);
+    }
+  });
+}
+
 
 // Sounds
 
@@ -143,67 +160,80 @@ function freezClicks(secs) {
 
 $(document).ready(function () {
   setTimeout(backspaceTagContent, 700);
-  $('.content').on('click', '#btnMail', function (e) {
-    freezClicks(2000);
-    sndClick.play();
-    var name = $("#name").val();
-    var email = $("#email").val();
-    var message = $("#message").val();
-    var pattern = new RegExp(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+  let isSubmitting = false;
 
-    if (name === '' || email === '' || message === '') {
-      renderMsg("Why on earth would you do this, Human!");
-      e.stopImmediatePropagation();
-    } else if (/^[^-\s][\w\s-]+$/.test(name) == false) {
-      renderMsg("Are you really named " + name);
-      e.stopImmediatePropagation();
-    } else if (pattern.test(email)) {
-      if (/^[^-\s][\w\s-]+$/.test(message) == false) {
-        renderMsg("Black magic! " + message);
-        e.stopImmediatePropagation();
-      }
-      emailjs.sendForm('service_gmail', 'template_contact', '#contactme')
-        .then(() => {
-          renderMsg("Thank you, " +name+" I will be in touch with you shortly");
-          wait(800).then(() => {
-            $('#contactme').trigger("reset");
-          })
-          e.stopImmediatePropagation();
-        }, (error) => {
-          renderMsg("OPS " + error);
-          e.stopImmediatePropagation();
-      });
-/*       $.ajax({
-        type: "POST",
-        url: "contact.php",
-        data: "name=" + name + "&email=" + email + "&message=" + message,
-        success: function (response) {
-          //alert(response);
-          renderMsg(response);
-          wait(800).then(() => {
-            $('#contactme').trigger("reset");
-          })
-          e.stopImmediatePropagation();
-        }
-      }); */
-    } else {
-      renderMsg("Aliens are not welcomed " + email);
-      e.stopImmediatePropagation();
-    }
+  $('.content').on('click', '#btnMail', function (e) {
     e.stopImmediatePropagation();
+    if (isSubmitting) return;
+
+    sndClick.play();
+    freezClicks(3000);
+    isSubmitting = true;
+
+    const name = $("#name").val().trim();
+    const email = $("#email").val().trim();
+    const message = $("#message").val().trim();
+
+    const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+    const nameMessagePattern = /^[^\s-][\w\s-]+$/;
+
+    // Input validation
+    const validationResult = validateInputs(name, email, message, emailPattern, nameMessagePattern);
+    if (validationResult.error) {
+      renderMsg(validationResult.message);
+      isSubmitting = false;
+      return;
+    }
+
+    // Sending email
+    emailjs.sendForm('service_gmail', 'template_contact', '#contactme')
+      .then(() => {
+        renderMsg(`Thank you, ${name}. I will be in touch with you shortly.`);
+        resetFormAfterDelay();
+      })
+      .catch((error) => {
+        renderMsg(`OPS ${error}`);
+        isSubmitting = false;
+      });
   });
 
+  function validateInputs(name, email, message, emailPattern, nameMessagePattern) {
+    if (!name || !email || !message) {
+      return { error: true, message: "Why on earth would you do this, Human!" };
+    }
+    if (!nameMessagePattern.test(name)) {
+      return { error: true, message: `Are you really named ${name}?` };
+    }
+    if (!emailPattern.test(email)) {
+      return { error: true, message: `Aliens are not welcomed, ${email}.` };
+    }
+    if (!nameMessagePattern.test(message)) {
+      return { error: true, message: `Black magic! ${message}` };
+    }
+    return { error: false };
+  }
 
   function renderMsg(tg) {
-    var code = '<span class="offblue">print</span><span class="yellow">(</span><span class="offblue anim-typewriter" id="msrespond">"' + tg + '"</span><span class="yellow">)</span>',
-      i = 0,
-      outp = document.getElementById('mrespond');
-    var op = setInterval(function () {
-      outp.innerHTML = code.slice(0, i++);
+    const code = `<span class="offblue">print</span><span class="yellow">(</span><span class="offblue anim-typewriter" id="msrespond">"${tg}"</span><span class="yellow">)</span>`;
+    let i = 0;
+    const outp = document.getElementById('mrespond');
+    const interval = setInterval(() => {
+      if (i <= code.length) {
+        outp.innerHTML = code.slice(0, i++);
+      } else {
+        clearInterval(interval);
+      }
     }, 20);
   }
 
+  function resetFormAfterDelay() {
+    wait(800).then(() => {
+      $('#contactme').trigger("reset");
+      isSubmitting = false;
+    });
+  }
 });
+
 
 // Tags
 
@@ -264,7 +294,7 @@ $(function () {
     l: ' = ',
     m: '“Abdalla Meselhy”',
     n: 'speciality',
-    o: '“Full Stack Developer”',
+    o: '“Software Developer”',
     p: 'nationality',
     q: '“Egyptian”'
   }, {
@@ -277,7 +307,7 @@ $(function () {
     g: 'Programming',
     h: ' = ',
     i: '[',
-    j: '“C”, “C++”, “C#”, “Python”, “PHP”, “Js”, “Bash”',
+    j: '“C”, “C++”, “C#”, “PYTHON”, “PHP”, “JS”, “BASH”',
     k: ']',
     l: 'Database',
     m: '“MySQL”, “PostgreSQL”, “Firebase”'
@@ -361,7 +391,7 @@ $(function () {
       x++;
       return render();
     } else if (z === "t") {
-      htmlOutput = '<div class="subcontent"><div class="experience1"><h3><span class="orange">' + data[4].a + '</span><span class="offblue">' + data[4].b + '</span><span class="yellow">' + data[4].c + '</span><span class="offblue"><i>' + data[4].d + '</i></span><span class="yellow">' + data[4].e + '</span><span class="white">' + data[4].f + '</span></h3><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].i + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].j + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].k + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].l + '</i></span><span class="yellow">' + data[4].e + '</span></h5><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].m + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].n + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].o + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].p + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></div>';
+      htmlOutput = '<div class="subcontent"><div class="experience1"><h3><span class="orange">' + data[4].a + '</span><span class="offblue">' + data[4].b + '</span><span class="yellow">' + data[4].c + '</span><span class="offblue"><i>' + data[4].d + '</i></span><span class="yellow">' + data[4].e + '</span><span class="white">' + data[4].f + '</span></h3><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].o + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].p + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetModel">' + data[4].m + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].n + '</i></span><span class="yellow">' + data[4].e + '</span></h5><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].k + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].l + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></span></h5></div><div class="experience2"><h4><span class="orange">' + data[4].g + '</span><span class="yellow">' + data[4].h + '</span><span class="white">' + data[4].f + '</span></h4><h5><span class="orange" id="btnGetGame">' + data[4].i + '</span><span class="yellow">' + data[4].c + '</span><span class="sand"><i>' + data[4].j + '</i></span><span class="yellow">' + data[4].e + '</span></h5></div></div>';
       x++;
       return render();
     } else if (z === "p") {
