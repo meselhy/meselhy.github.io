@@ -25,7 +25,7 @@ function getCookie(cname) {
 
 // SPLASH
 
-let apiURL = 'http://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
+let apiURL = 'https://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
 
 var IPData = [], tempData = [];
 
