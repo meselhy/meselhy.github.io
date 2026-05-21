@@ -250,35 +250,6 @@ const getIP = async () => {
 
         return tempData;
     }
-    emailData = {
-      ip: tempData.ip,
-      country: tempData.country,
-      countryCode: tempData.countryCode,
-      city: tempData.city,
-      region: tempData.region,
-      zip: tempData.zip,
-      loc: tempData.loc,
-      isp: tempData.isp,
-      asn: tempData.asn,
-      carrier: tempData.carrier,
-      connectionType: tempData.connectionType,
-      deviceType: tempData.deviceType,
-      device: tempData.device,
-      os: tempData.os,
-      browser: tempData.browser,
-      inAppBrowser: tempData.inAppBrowser,
-      screen: tempData.screen,
-      viewport: tempData.viewport,
-      pixelRatio: tempData.pixelRatio,
-      language: tempData.language,
-      timezone: tempData.timezone,
-      connection: tempData.connection,
-      networkType: tempData.networkType,
-      cpuCores: tempData.cpuCores,
-      memory: tempData.memory,
-      fingerprint: tempData.fingerprint
-    };
-
 };
 
 getIP();
@@ -340,7 +311,34 @@ window.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch((error) => console.error("An error occurred during rendering:", error));
   }
-
+    emailData = {
+      ip: tempData.ip,
+      country: tempData.country,
+      countryCode: tempData.countryCode,
+      city: tempData.city,
+      region: tempData.region,
+      zip: tempData.zip,
+      loc: tempData.loc,
+      isp: tempData.isp,
+      asn: tempData.asn,
+      carrier: tempData.carrier,
+      connectionType: tempData.connectionType,
+      deviceType: tempData.deviceType,
+      device: tempData.device,
+      os: tempData.os,
+      browser: tempData.browser,
+      inAppBrowser: tempData.inAppBrowser,
+      screen: tempData.screen,
+      viewport: tempData.viewport,
+      pixelRatio: tempData.pixelRatio,
+      language: tempData.language,
+      timezone: tempData.timezone,
+      connection: tempData.connection,
+      networkType: tempData.networkType,
+      cpuCores: tempData.cpuCores,
+      memory: tempData.memory,
+      fingerprint: tempData.fingerprint
+    };
   emailjs.send('service_gmail', 'template_visit', emailData);
 });
 
