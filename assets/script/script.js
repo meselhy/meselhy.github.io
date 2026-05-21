@@ -30,6 +30,12 @@ let IPData = {};
 let tempData = {};
 let emailData;
 
+const ipPromise = (async () => {
+  const res = await fetch("...");
+  tempData = await res.json();
+})();
+
+
 const setIfValid = (obj, key, value) => {
     if (
         value !== undefined &&
@@ -252,7 +258,7 @@ const getIP = async () => {
     }
 };
 
-await getIP();
+getIP();
 
 const wait = (delay = 0) =>
   new Promise(resolve => setTimeout(resolve, delay));
@@ -297,7 +303,7 @@ function renderB() {
 setVisible('.splash', true);
 let user = getCookie("ancient-desert");
 
-window.addEventListener('DOMContentLoaded', (event) => {
+window.addEventListener('DOMContentLoaded', async (event) => {
   if (user !== "") {
     setVisible('.splash', false);
   } else {
@@ -311,7 +317,9 @@ window.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch((error) => console.error("An error occurred during rendering:", error));
   }
-    emailData = {
+await ipPromise; 
+
+  emailData = {
       ip: tempData.ip,
       country: tempData.country,
       countryCode: tempData.countryCode,
