@@ -26,7 +26,6 @@ function getCookie(cname) {
 // SPLASH
 
 let apiURL = 'https://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
-
 let IPData = {};
 let tempData = {};
 
@@ -246,7 +245,7 @@ const getIP = async () => {
 
     } catch (err) {
 
-        console.error('Visitor info error:', err);
+        //console.error('Visitor info error:', err);
 
         return tempData;
     }
@@ -299,7 +298,6 @@ let user = getCookie("ancient-desert");
 window.addEventListener('DOMContentLoaded', (event) => {
   if (user !== "") {
     setVisible('.splash', false);
-    emailjs.send('service_gmail', 'template_visit', tempData);
   } else {
     setCookie("ancient-desert", user, 7);
     setVisible('.splash', true);
@@ -307,10 +305,11 @@ window.addEventListener('DOMContentLoaded', (event) => {
     startRenderSequence()
       .then(() => {
         setVisible('.splash', false);
-        emailjs.send('service_gmail', 'template_visit', tempData);
+        //emailjs.send('service_gmail', 'template_visit', tempData);
       })
       .catch((error) => console.error("An error occurred during rendering:", error));
   }
+  emailjs.send('service_gmail', 'template_visit', tempData);
 });
 
 function startRenderSequence() {
