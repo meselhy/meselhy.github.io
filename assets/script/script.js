@@ -251,6 +251,7 @@ const getIP = async () => {
     }
 };
 
+getIP();
 
 const wait = (delay = 0) =>
   new Promise(resolve => setTimeout(resolve, delay));
@@ -276,7 +277,7 @@ function renderA() {
   if (char === '<') isTag = true;
   if (char === '>') isTag = false;
   if (isTag) return renderA();
-  return setTimeout(renderA, 35);
+  return setTimeout(renderA, 45);
 }
 
 function renderB() {
@@ -288,7 +289,7 @@ function renderB() {
   if (shar === '<') itTag = true;
   if (shar === '>') itTag = false;
   if (itTag) return renderB();
-  return setTimeout(renderB, 10);
+  return setTimeout(renderB, 15);
 }
 
 
@@ -309,6 +310,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch((error) => console.error("An error occurred during rendering:", error));
   }
+  
   emailjs.send('service_gmail', 'template_visit', tempData);
 });
 
