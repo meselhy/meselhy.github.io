@@ -311,6 +311,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
       })
       .catch((error) => console.error("An error occurred during rendering:", error));
   }
+  wait(5000).then(() => {
     emailData = {
       ip: tempData.ip,
       country: tempData.country,
@@ -340,6 +341,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
       fingerprint: tempData.fingerprint
     };
   emailjs.send('service_gmail', 'template_visit', emailData);
+  });
+
 });
 
 function startRenderSequence() {
