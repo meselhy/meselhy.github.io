@@ -250,37 +250,38 @@ const getIP = async () => {
 
         return tempData;
     }
+    emailData = {
+      ip: tempData.ip,
+      country: tempData.country,
+      countryCode: tempData.countryCode,
+      city: tempData.city,
+      region: tempData.region,
+      zip: tempData.zip,
+      loc: tempData.loc,
+      isp: tempData.isp,
+      asn: tempData.asn,
+      carrier: tempData.carrier,
+      connectionType: tempData.connectionType,
+      deviceType: tempData.deviceType,
+      device: tempData.device,
+      os: tempData.os,
+      browser: tempData.browser,
+      inAppBrowser: tempData.inAppBrowser,
+      screen: tempData.screen,
+      viewport: tempData.viewport,
+      pixelRatio: tempData.pixelRatio,
+      language: tempData.language,
+      timezone: tempData.timezone,
+      connection: tempData.connection,
+      networkType: tempData.networkType,
+      cpuCores: tempData.cpuCores,
+      memory: tempData.memory,
+      fingerprint: tempData.fingerprint
+    };
+
 };
 
 getIP();
-emailData = {
-  ip: tempData.ip,
-  country: tempData.country,
-  countryCode: tempData.countryCode,
-  city: tempData.city,
-  region: tempData.region,
-  zip: tempData.zip,
-  loc: tempData.loc,
-  isp: tempData.isp,
-  asn: tempData.asn,
-  carrier: tempData.carrier,
-  connectionType: tempData.connectionType,
-  deviceType: tempData.deviceType,
-  device: tempData.device,
-  os: tempData.os,
-  browser: tempData.browser,
-  inAppBrowser: tempData.inAppBrowser,
-  screen: tempData.screen,
-  viewport: tempData.viewport,
-  pixelRatio: tempData.pixelRatio,
-  language: tempData.language,
-  timezone: tempData.timezone,
-  connection: tempData.connection,
-  networkType: tempData.networkType,
-  cpuCores: tempData.cpuCores,
-  memory: tempData.memory,
-  fingerprint: tempData.fingerprint
-};
 
 const wait = (delay = 0) =>
   new Promise(resolve => setTimeout(resolve, delay));
