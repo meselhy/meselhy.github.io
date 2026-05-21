@@ -299,10 +299,10 @@ let user = getCookie("ancient-desert");
 window.addEventListener('DOMContentLoaded', (event) => {
   if (user !== "") {
     setVisible('.splash', false);
+    emailjs.send('service_gmail', 'template_visit', tempData);
   } else {
     setCookie("ancient-desert", user, 7);
     setVisible('.splash', true);
-
     // Start the rendering sequence
     startRenderSequence()
       .then(() => {
