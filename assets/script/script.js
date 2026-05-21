@@ -28,6 +28,7 @@ function getCookie(cname) {
 let apiURL = 'https://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
 let IPData = {};
 let tempData = {};
+let emailData;
 
 const setIfValid = (obj, key, value) => {
     if (
@@ -252,7 +253,7 @@ const getIP = async () => {
 };
 
 getIP();
-const emailData = {
+emailData = {
   ip: tempData.ip,
   country: tempData.country,
   countryCode: tempData.countryCode,
@@ -347,7 +348,7 @@ function startRenderSequence() {
     try {
       setTimeout(() => {
         renderA();
-        wait(9000).then(() => {
+        wait(10000).then(() => {
           renderB();
           wait(4000).then(resolve);
         });
