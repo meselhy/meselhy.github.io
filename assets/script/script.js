@@ -27,20 +27,231 @@ function getCookie(cname) {
 
 let apiURL = 'https://api.ipstack.com/check?access_key=bc1da7650f133274f0267cb8a06ad8d2';
 
-var IPData = [], tempData = [];
+let IPData = {};
+let tempData = {};
 
-const getIP = async () => {
-  IPData = await fetch(apiURL).then(response => response.json());
-  tempData = {
-    ip: IPData.ip,
-    city: IPData.city,
-    region: IPData.region_name,
-    loc: IPData.latitude + ',' + IPData.longitude,
-    org: IPData.ip_routing_type + ',' + IPData.connection_type,
-  };
+const setIfValid = (obj, key, value) => {
+    if (
+        value !== undefined &&
+        value !== null &&
+        value !== '' &&
+        value !== 'undefined'
+    ) {
+        obj[key] = value;
+    }
 };
 
-getIP();
+const getIP = async () => {
+    try {
+
+        // =========================
+        // IPSTACK
+        // =========================
+        const response = await fetch(apiURL);
+
+        if (!response.ok) {
+            throw new Error('Failed to fetch IP data');
+        }
+
+        IPData = await response.json();
+
+        // =========================
+        // BASIC NETWORK INFO
+        // =========================
+        setIfValid(tempData, 'ip', IPData.ip);
+        setIfValid(tempData, 'country', IPData.country_name);
+        setIfValid(tempData, 'countryCode', IPData.country_code);
+        setIfValid(tempData, 'city', IPData.city);
+        setIfValid(tempData, 'region', IPData.region_name);
+        setIfValid(tempData, 'zip', IPData.zip);
+
+        // GEO
+        if (IPData.latitude && IPData.longitude) {
+            tempData.loc = `${IPData.latitude},${IPData.longitude}`;
+        }
+
+        // ISP / CONNECTION
+        setIfValid(tempData, 'isp', IPData.connection?.isp);
+        setIfValid(tempData, 'connectionType', IPData.connection?.type);
+
+        // ASN
+        setIfValid(tempData, 'asn', IPData.connection?.asn);
+
+        // CARRIER
+        setIfValid(tempData, 'carrier', IPData.connection?.carrier);
+
+        // =========================
+        // DEVICE DETECTION
+        // =========================
+        const ua = navigator.userAgent;
+
+        let deviceType = 'Desktop';
+
+        if (/tablet|ipad/i.test(ua)) {
+            deviceType = 'Tablet';
+        } else if (/mobile|iphone|android/i.test(ua)) {
+            deviceType = 'Mobile';
+        }
+
+        if (/smart-tv|smarttv|googletv|appletv/i.test(ua)) {
+            deviceType = 'Smart TV';
+        }
+
+        setIfValid(tempData, 'deviceType', deviceType);
+
+        // DEVICE NAME
+        if (/iphone/i.test(ua)) {
+            tempData.device = 'iPhone';
+        } else if (/ipad/i.test(ua)) {
+            tempData.device = 'iPad';
+        } else if (/android/i.test(ua)) {
+            tempData.device = 'Android';
+        }
+
+        // =========================
+        // OS
+        // =========================
+        let os = 'Unknown';
+
+        if (/windows/i.test(ua)) {
+            os = 'Windows';
+        } else if (/android/i.test(ua)) {
+            os = 'Android';
+        } else if (/iphone|ipad|ipod/i.test(ua)) {
+            os = 'iOS';
+        } else if (/mac/i.test(ua)) {
+            os = 'macOS';
+        } else if (/linux/i.test(ua)) {
+            os = 'Linux';
+        }
+
+        setIfValid(tempData, 'os', os);
+
+        // =========================
+        // BROWSER
+        // =========================
+        let browser = 'Unknown';
+
+        if (/edg/i.test(ua)) {
+            browser = 'Edge';
+        } else if (/opr|opera/i.test(ua)) {
+            browser = 'Opera';
+        } else if (/chrome/i.test(ua)) {
+            browser = 'Chrome';
+        } else if (/safari/i.test(ua)) {
+            browser = 'Safari';
+        } else if (/firefox/i.test(ua)) {
+            browser = 'Firefox';
+        }
+
+        setIfValid(tempData, 'browser', browser);
+
+        // =========================
+        // IN-APP BROWSER
+        // =========================
+        if (/FBAN|FBAV/i.test(ua)) {
+            tempData.inAppBrowser = 'Facebook';
+        } else if (/Instagram/i.test(ua)) {
+            tempData.inAppBrowser = 'Instagram';
+        } else if (/Twitter/i.test(ua)) {
+            tempData.inAppBrowser = 'X/Twitter';
+        } else if (/TikTok/i.test(ua)) {
+            tempData.inAppBrowser = 'TikTok';
+        } else if (/Telegram/i.test(ua)) {
+            tempData.inAppBrowser = 'Telegram';
+        }
+
+        // =========================
+        // SCREEN
+        // =========================
+        setIfValid(tempData, 'screen', `${screen.width}x${screen.height}`);
+        setIfValid(tempData, 'viewport', `${window.innerWidth}x${window.innerHeight}`);
+        setIfValid(tempData, 'pixelRatio', window.devicePixelRatio);
+
+        // =========================
+        // LANGUAGE / TIMEZONE
+        // =========================
+        setIfValid(tempData, 'language', navigator.language);
+
+        setIfValid(
+            tempData,
+            'timezone',
+            Intl.DateTimeFormat().resolvedOptions().timeZone
+        );
+
+        // =========================
+        // NETWORK INFO
+        // =========================
+        const connection =
+            navigator.connection ||
+            navigator.mozConnection ||
+            navigator.webkitConnection;
+
+        if (connection) {
+
+            setIfValid(
+                tempData,
+                'networkType',
+                connection.effectiveType
+            );
+
+            const cellularTypes = ['slow-2g', '2g', '3g', '4g', '5g'];
+
+            tempData.connection =
+                cellularTypes.includes(connection.effectiveType)
+                    ? 'Cellular'
+                    : 'Wi-Fi';
+        }
+
+        // =========================
+        // HARDWARE
+        // =========================
+        setIfValid(
+            tempData,
+            'cpuCores',
+            navigator.hardwareConcurrency
+        );
+
+        setIfValid(
+            tempData,
+            'memory',
+            navigator.deviceMemory
+        );
+
+        // =========================
+        // LIGHT FINGERPRINT
+        // =========================
+        const fingerprintSource = [
+            navigator.userAgent,
+            navigator.language,
+            screen.width,
+            screen.height,
+            Intl.DateTimeFormat().resolvedOptions().timeZone,
+            navigator.hardwareConcurrency,
+            navigator.deviceMemory
+        ].join('|');
+
+        const encoder = new TextEncoder();
+        const data = encoder.encode(fingerprintSource);
+
+        const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+
+        const hashArray = Array.from(new Uint8Array(hashBuffer));
+
+        tempData.fingerprint = hashArray
+            .map(b => b.toString(16).padStart(2, '0'))
+            .join('');
+
+        return tempData;
+
+    } catch (err) {
+
+        console.error('Visitor info error:', err);
+
+        return tempData;
+    }
+};
+
 
 const wait = (delay = 0) =>
   new Promise(resolve => setTimeout(resolve, delay));
