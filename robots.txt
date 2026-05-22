@@ -1,5 +1,18 @@
+# =============================================
+# robots.txt for meselhy.dev
+# Developer Portfolio
+# =============================================
+
 User-agent: *
-Disallow: /.git
+
+# Allow everything (this is the default, but we make it explicit)
 Allow: /
 
+# Security - Block sensitive directories
+Disallow: /.git/
+Disallow: /.env
+Disallow: /assets/script/   # optional: if you don't want source maps or scripts indexed
+Disallow: /sw.js.map
+
+# Sitemap
 Sitemap: https://meselhy.dev/sitemap.xml
