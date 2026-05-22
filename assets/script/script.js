@@ -385,13 +385,29 @@ $(function () {
 
   function render() {
     try {
-      text = htmlOutput.slice(0, renderI++);
-      if (text === htmlOutput) { renderI = 0; return; }
-      $content.html(text + '&#x2759;');
-      char = text.slice(-1);
-      if (char === '<' || char === '>') return render();
-      setTimeout(render, 25);
-    } catch (err) {
+      if (renderCounter >= 8) {
+        $('#content').removeClass('content');
+        var err = '<span class="error" id="error"><h4>"COMMAND OVERFLOW"<br><br>Too many requests detected<br>The terminal is now in zen mode<br>Cooling down the matrix...</h4></span>';
+        text = err.slice(0, renderI++);
+        if (text === err) return renderI = 0;
+        $content.html(text + '&#x2759;');
+        char = text.slice(-1);
+        if (char === '<') isTag = true;
+        if (char === '>') isTag = false;
+        if (isTag) return render();
+        return setTimeout(render, 25);
+      } else {
+        text = htmlOutput.slice(0, renderI++);
+        if (text === htmlOutput) return renderI = 0;
+        $content.html(text + '&#x2759;');
+        char = text.slice(-1);
+        if (char === '<') isTag = true;
+        if (char === '>') isTag = false;
+        if (isTag) return render();
+        return setTimeout(render, 25);
+      }
+    }
+    catch (err) {
       console.error("Render error:", err);
     }
   }
